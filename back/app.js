@@ -8,7 +8,7 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
-
+const cors         = require('cors');
 const session    = require("express-session");
 const MongoStore = require('connect-mongo')(session);
 const flash      = require("connect-flash");
@@ -28,12 +28,25 @@ const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.
 
 const app = express();
 
+const whiteList = ['http://localhost:3000']
+const corsOptions = {
+  origin: (origin, cb) => {
+    const originIsWhitelisted = whiteList.includes(origin);
+    cb(null, originIsWhitelisted)
+  },
+  credentials: true
+}
+app.use(cors(corsOptions));
+
 // Middleware Setup
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
+app.use(cors({
+  credentials: true,
+  origin: ['http://localhost:3000']
+}));
 // Express View engine setup
 
 app.use(require('node-sass-middleware')({

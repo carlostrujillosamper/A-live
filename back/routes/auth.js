@@ -10,6 +10,24 @@ const User = require("../models/User");
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
+
+
+// router.get("/userData", (req, res) => {
+//   let user = JSON.parse(JSON.stringify(req.user))
+//   // delete user.password
+//   // delete user.__v
+//   // res.json(req.user);
+//   res.status(200).json(user)
+// });
+router.get("/currentUser", (req, res) => {
+  // let user = JSON.parse(JSON.stringify(req.user))
+  // delete user.password
+  // delete user.__v
+  // res.json(req.user);
+  res.status(200).json(req.user)
+});
+
+
 passport.use(
   new SpotifyStrategy(
     {
@@ -69,23 +87,23 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(user, done) {
   done(null, user);
 });
-router.get('/profile', (req, res)=> {
+router.get('/myTopArtists', (req, res)=> {
   
   getMyTopArtists(req.user.token)
-  // getAllConcerts(artista) 
   
-  res.render('auth/profile', { user: req.user });
-  
+  // res.render('auth/profile', { user: req.user });
+  // res.json(getMyTopArtists(req.user.token))
+  // res.status(200).json(getMyTopArtists(req.user.token))
+  res.json()
 });
 
 function getMyTopArtists(token){
 
 axios.get("https://api.spotify.com/v1/me/top/artists",{headers: {Authorization: `Bearer ${token}`}})
 .then(axiosresponse=>{
- for (var i = 0 ; i<axiosresponse.data.items.length; i++){
-  console.log(axiosresponse.data.items[i])
-
- }
+axiosresponse.data.items.map((artist)=>{
+  console.log(artist.name)
+})
 })
 .catch(err=> console.log(err))
 }
@@ -113,7 +131,9 @@ router.post(
     scope: ['user-read-email', 'user-read-private','user-top-read'],
     showDialog: true
   }),
-  function(req, res) {
+  function(req, res,next) {
+
+    
  
   }
 );
@@ -124,8 +144,8 @@ router.get(
   function(req, res) {
     // Successful authentication, redirect home.   
 
-
-    res.redirect('/auth/profile');
+    console.log(req.user)
+    res.redirect("http://localhost:3000/profile");
   }
 );
 
@@ -165,9 +185,17 @@ router.post("/signup", (req, res, next) => {
   });
 });
 
+router.get('/loggedin', (req, res, next) => {
+  if (req.user) {
+    res.status(200).json(req.user);
+  } else {
+    next(new Error('Not logged in'))
+  }
+})
+
 router.get("/logout", (req, res) => {
   req.logout();
-  res.redirect("/");
+  res.status(200).json({ message: 'logged out' });
 });
 
 
