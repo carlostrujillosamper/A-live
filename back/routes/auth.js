@@ -184,7 +184,7 @@ function getMyTopArtists(token) {
 function getAllConcerts(artists) {
   axios
     .get(
-      `https://app.ticketmaster.com/discovery/v2/events.json?keyword=${artists}&size=1&sort=date,asc&apikey=eHV9YEef21RiqpNGWGJB1C3rIY16C62y`
+      `https://app.ticketmaster.com/discovery/v2/events.json?keyword=${artists}&size=5&sort=date,asc&apikey=eHV9YEef21RiqpNGWGJB1C3rIY16C62y`
     )
 
     .then(responseFromApi => {
@@ -199,11 +199,11 @@ function getAllConcerts(artists) {
     .catch(err => console.log(err));
 }
 
-router.get("/artist-events", (req, res, next) => {
+router.get("/artist-events/:keyword", (req, res, next) => {
   axios
     .get(
       `https://app.ticketmaster.com/discovery/v2/events.json?keyword=${
-        req.user.favouriteArtists[0].name
+        req.params.keyword
       }&size=10&sort=date,asc&apikey=eHV9YEef21RiqpNGWGJB1C3rIY16C62y`
     )
 

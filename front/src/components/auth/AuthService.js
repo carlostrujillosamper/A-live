@@ -32,6 +32,12 @@ class AuthService {
     return this.service.get('/yourArtists')
     .then(response => response.data)
   }
+
+artistEvents = (keyword) =>{
+  return this.service.get(`/artist-events/${keyword}`)
+  .then(response => response.data)
 }
+}
+
 
 export default AuthService;

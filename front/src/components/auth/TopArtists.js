@@ -42,17 +42,18 @@ class TopArtists extends Component {
               return (
                 
                 <div className="card">
+
       <header style={{backgroundImage:'url(' + artist.images[0].url + ')'}}  className="card-header">
         <h4 className="card-header--title"> </h4>
       </header>
       <div className="card-body">
-        <p className="date">March 20 2015</p>
+        <p className="date">Followers {artist.followers.total}</p>
         
         <h2>{artist.name}</h2>
         
         <p className="body-content">{artist.genres[0]} || {artist.genres[1]}</p>
         
-        <Button />
+        <Button artist={artist}/>
       </div>
               </div>
              
@@ -73,9 +74,12 @@ export default TopArtists;
 class Button extends React.Component {
   render() {
     return (
+      <Link to={`/artist-events/${this.props.artist.name}`}>
+
       <button className="button button-primary">
         <i className="fa fa-chevron-right"></i> Find events
       </button>
+      </Link>
     )
   }
 }
