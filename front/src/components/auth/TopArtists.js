@@ -34,13 +34,13 @@ class TopArtists extends Component {
       <div>
         
         
-        <div style={{width: '60%', float:"left"}}>
+        <div className="card-list">
 
           
        
             {!this.state.isLoading ? this.state.favouriteArtist.map(artist=>{
               return (
-                <div className="card-list">
+                
                 <div className="card">
       <header style={{backgroundImage:'url(' + artist.images[0].url + ')'}}  className="card-header">
         <h4 className="card-header--title"> </h4>
@@ -55,7 +55,7 @@ class TopArtists extends Component {
         <Button />
       </div>
               </div>
-              </div>
+             
                 )
             }):<h3>Loading...</h3>}
  

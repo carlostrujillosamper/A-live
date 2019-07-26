@@ -72,11 +72,12 @@ class App extends Component {
               {/* aqui simplemente se muestra un lorem ipsum genérico para que veáis contenidos que solo se muestran a usuarios logeados */}
               {/* <Contents></Contents> */}
               {/* <TopArtists></TopArtists> */}
-              <div className="card-list">
-              <Card></Card>
+             
+              <Route exact path='/topartists' render={() => <TopArtists/>} />
+
 
               
-              </div>
+             
 
             </header>
           </div>
@@ -93,7 +94,6 @@ class App extends Component {
               <Navbar userInSession={this.state.loggedInUser} logout={this.logout} />
               <Switch>
               <Route exact path='/profile' render={() => <Profile/>} />
-              <Route exact path='/topartists' render={() => <TopArtists/>} />
 
                 <Route exact path='/signup' render={() => <SignUp getUser={this.getUser} />} />
                 <Route exact path='/login' render={() => <Login getUser={this.getUser} />} />
