@@ -10,6 +10,8 @@ import Login from './components/auth/Login';
 import AuthService from './components/auth/AuthService';
 import Contents from './components/contents/Contents'
 import Profile from './components/auth/Profile'
+import TopArtists from './components/auth/TopArtists';
+import Card from './components/auth/TopArtists';
 
 
 //App es la aplicación base, que se sirve del servicio AuthService para conectar con la bbdd
@@ -68,7 +70,14 @@ class App extends Component {
             <header className="App-header">
               <Navbar userInSession={this.state.loggedInUser} logout={this.logout} />
               {/* aqui simplemente se muestra un lorem ipsum genérico para que veáis contenidos que solo se muestran a usuarios logeados */}
-              <Contents></Contents>
+              {/* <Contents></Contents> */}
+              {/* <TopArtists></TopArtists> */}
+              <div className="card-list">
+              <Card></Card>
+
+              
+              </div>
+
             </header>
           </div>
         </React.Fragment>
@@ -84,6 +93,7 @@ class App extends Component {
               <Navbar userInSession={this.state.loggedInUser} logout={this.logout} />
               <Switch>
               <Route exact path='/profile' render={() => <Profile/>} />
+              <Route exact path='/topartists' render={() => <TopArtists/>} />
 
                 <Route exact path='/signup' render={() => <SignUp getUser={this.getUser} />} />
                 <Route exact path='/login' render={() => <Login getUser={this.getUser} />} />

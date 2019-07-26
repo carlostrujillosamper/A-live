@@ -9,7 +9,8 @@ const userSchema = new Schema({
   token:String,
   refreshToken:String,
   photo:String,
-  country:String
+  country:String,
+  favouriteArtists:[]
 }, {
   timestamps: {
     createdAt: 'created_at',
