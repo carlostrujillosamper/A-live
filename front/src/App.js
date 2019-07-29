@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect , withRouter} from "react-router-dom";
 
 // import ProjectList from './components/projects/ProjectList';
 import Navbar from "./components/navbar/Navbar";
@@ -34,8 +34,17 @@ class App extends Component {
   logout = () => {
     this.service.logout().then(() => {
       this.setState({ loggedInUser: null });
-    });
-  };
+      this.props.history.push('/')
+    })
+}
+componentDidMount() {
+  this.fetchUser()
+}
+
+
+
+    
+  
 
   //este método vuelca la información del usuario y lo guarda en el state de app que siempre puedes revisitar
   fetchUser() {
@@ -99,7 +108,7 @@ class App extends Component {
       //si no estás logeado, mostrar opcionalmente o login o signup
       return (
         <React.Fragment>
-          <Redirect to="/login" />
+          {/* <Redirect to="/login" /> */}
 
           <div className="App">
             <header className="App-header">
@@ -129,4 +138,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
