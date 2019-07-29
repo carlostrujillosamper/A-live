@@ -13,6 +13,7 @@ import Profile from "./components/auth/Profile";
 import TopArtists from "./components/auth/TopArtists";
 import Card from "./components/auth/TopArtists";
 import ArtistEvents from "./components/auth/ArtistEvents";
+import EventParties from "./components/auth/EventParties";
 
 //App es la aplicación base, que se sirve del servicio AuthService para conectar con la bbdd
 class App extends Component {
@@ -71,6 +72,8 @@ class App extends Component {
                 userInSession={this.state.loggedInUser}
                 logout={this.logout}
               />
+            {/* <div style={{backgroundImage:'url(' + "https://homestudioexpert.com/wp-content/uploads/2018/04/pexels-photo-196652.jpeg" + ')'}}  className="card-header-home"/> */}
+
               {/* aqui simplemente se muestra un lorem ipsum genérico para que veáis contenidos que solo se muestran a usuarios logeados */}
               {/* <Contents></Contents> */}
               {/* <TopArtists></TopArtists> */}
@@ -81,6 +84,12 @@ class App extends Component {
                 path="/artist-events/:keyword"
                 // render={() => <ArtistEvents />}
                 component={ArtistEvents}
+              />
+               <Route
+                exact
+                path="/event-parties/:eventId"
+                // render={() => <ArtistEvents />}
+                component={EventParties}
               />
             </header>
           </div>

@@ -120,6 +120,9 @@ router.get("/getmyTopArtists", (req, res) => {
     .catch(err => console.log(err));
 });
 
+
+
+
 function getMyTopArtists() {
   axios
     .get("https://api.spotify.com/v1/me/top/artists", {
@@ -209,6 +212,21 @@ router.get("/artist-events/:keyword", (req, res, next) => {
 
     .then(responseFromApi => {
       res.json(responseFromApi.data._embedded.events);
+    })
+    .catch(err => console.log(err));
+});
+
+router.get("/event-parties/:eventId", (req, res, next) => {
+  axios
+    .get(
+      `https://app.ticketmaster.com/discovery/v2/events/${
+        req.params.eventId
+      }.json?apikey=eHV9YEef21RiqpNGWGJB1C3rIY16C62y`
+    )
+
+    .then(responseFromApi => {
+      console.log(responseFromApi.data)
+      res.json(responseFromApi.data)
     })
     .catch(err => console.log(err));
 });
