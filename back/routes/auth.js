@@ -5,7 +5,7 @@ const axios = require("axios");
 
 const router = express.Router();
 const User = require("../models/User");
-
+const Party = require ("../models/Party");
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
@@ -225,11 +225,35 @@ router.get("/event-parties/:eventId", (req, res, next) => {
     )
 
     .then(responseFromApi => {
-      console.log(responseFromApi.data)
       res.json(responseFromApi.data)
     })
     .catch(err => console.log(err));
 });
+router.post('/add-party', (req, res) => {
+  
+  Party
+    .create({
+      eventId: req.body.eventId,
+      createdBy : req.user.username,
+      members :[req.user._id]
+    })
+    .then(addedParty => [
+      res.json(addedParty)
+    ])
+
+})
+router.get('/user-parties/:eventId',(req,res)=>{
+  console.log(req.params.eventId)
+
+  Party
+    .find({ eventId: req.params.eventId })
+    .then(eventParties => 
+      [
+      res.json(eventParties)
+    ])
+    .catch(err => console.log(err));
+
+})
 
 router.get("/login", (req, res, next) => {
   res.render("auth/login", { message: req.flash("error") });

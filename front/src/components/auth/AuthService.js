@@ -43,6 +43,17 @@ eventParties = (eventId) =>{
   return this.service.get(`/event-parties/${eventId}`)
   .then(response => response.data)
 }
+
+addParties = (eventId) =>{
+  return this.service.post(`/add-party`,{eventId})
+  .then(response => response.data)
+
+}
+userParties = (eventId) =>{
+  return this.service.get(`/user-parties/${eventId}`)
+  .then(response => response.data)
+
+}
 }
 
 

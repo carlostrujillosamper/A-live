@@ -14,5 +14,5 @@ createdBy : String,
   }
 });
 
-const User = mongoose.model('Party', userSchema);
+const Party = mongoose.model('Party', userSchema);
 module.exports = Party;
