@@ -11,7 +11,7 @@ class Profile extends Component {
 
   getUser = () =>{
 
-    axios.get(`http://localhost:5000/auth/userData`,{headers: {'Content-Type':'application/json','Access-Control-Allow-Origin': '*'}})
+    axios.get(`${process.env.REACT_APP_URL}/auth/userData`,{headers: {'Content-Type':'application/json','Access-Control-Allow-Origin': '*'}})
    
     .then(responseFromApi => {
       console.log(responseFromApi)
