@@ -29,7 +29,7 @@ class Navbar extends Component {
             <li><Link to='/topartists'>TopArtists</Link></li>
           </ul>
 
-          <h2>Welcome, {this.state.loggedInUser.username} </h2>
+          <h2><img className="profile-pic" src={this.state.loggedInUser.photo}/>{this.state.loggedInUser.username} </h2>
         </nav>
       )
     } else {

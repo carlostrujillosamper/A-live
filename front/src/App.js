@@ -73,7 +73,7 @@ componentDidMount() {
       //en este caso mostramos los contenidos ya que hay usuario
       return (
         <React.Fragment>
-          <Redirect to="/home" />
+          {/* <Redirect to="/home" /> */}
 
           <div className="App">
             <header className="App-header">

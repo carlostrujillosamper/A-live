@@ -66,14 +66,14 @@ addNewParty(e) {
       {!this.state.isLoading ? 
 
         (
-          
+          <React.Fragment>
           <div style={{backgroundImage:'url(' + this.state.eventDetails.images[1].url + ')'}}  className="card-header-event">
           <h2>{this.state.eventDetails.dates.start.localDate}</h2>
           <h2>{this.state.eventDetails.name}</h2>
           <h2>{this.state.eventDetails._embedded.venues[0].markets[0].name}/{this.state.eventDetails._embedded.venues[0].city.name}</h2>
           <h2>{this.state.eventDetails._embedded.venues[0].name}-{this.state.eventDetails._embedded.venues[0].address.line1}</h2>
           <a  href={this.state.eventDetails.url}>Buy tickets</a>
-          <h2 style={{cursor:"pointer"}} onClick={(e) => this.addNewParty(e)}>Create Party</h2>
+          <h2 style={{cursor:"pointer"}} onClick={(e) => this.addNewParty(e)}>I'm going</h2>
           {this.state.eventParties.map(party=>{
             return(
               <h2>{party.createdBy}</h2>
@@ -84,6 +84,7 @@ addNewParty(e) {
           </div>
           
           
+          </React.Fragment>
         )
         :<h2>Loading</h2>}
         </React.Fragment>

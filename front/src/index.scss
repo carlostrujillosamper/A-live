@@ -114,7 +114,16 @@ body, html {
 }
 .nav-style{
   display:flex;
+  // position: fixed;
+  // width: 100vw;
+  justify-content: space-between;
+  align-items: center;
   list-style :none;
+  padding-right: 20px;
+  background: rgba(1, 100, 64, 0.815);
+  box-shadow: 10px 5px 40px 20px darken(rgb(0, 90, 90), 5%);
+  color:#00FFFF;
+
 }
 .event-list{
   display: grid;
@@ -141,5 +150,23 @@ body, html {
   background-size:cover;
   color:#fff;
 }
+.people-going{
+  display:flex;
+  flex-direction: row-reverse;
+  font-size: 35px;
+  color: #00FFA1
+}
+.people-not-going{
+  display:flex;
+  flex-direction: row-reverse;
+  font-size: 35px;
+  color: rgb(255, 0, 43)
+}
+.profile-pic{
+  height: 80px;
+  width: 80px;
+  border-radius: 50%; 
+}
+
 
 
