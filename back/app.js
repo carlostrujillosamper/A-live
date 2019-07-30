@@ -15,7 +15,7 @@ const flash      = require("connect-flash");
     
 
 mongoose
-  .connect('mongodb://localhost/back', {useNewUrlParser: true})
+  .connect(process.env.BBDDATLAS, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -93,6 +93,6 @@ app.use('/', index);
 
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
-      
+app.use((req, res) => {     res.sendFile(__dirname + "/public/index.html");    });     
 
 module.exports = app;

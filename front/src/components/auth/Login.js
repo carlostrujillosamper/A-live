@@ -45,7 +45,7 @@ class Login extends Component {
     return (<div>
       <h3>Please, login to our site</h3>
 
-        <a href="http://localhost:5000/auth/login/spotify" >login</a>
+        <a href={`${process.env.REACT_APP_URL}/login/spotify`} >login</a>
 
       <h1>{this.state.error ? 'Error' : ''}</h1>
     </div>)
