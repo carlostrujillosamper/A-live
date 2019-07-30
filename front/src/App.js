@@ -112,10 +112,10 @@ componentDidMount() {
 
           <div className="App">
             <header className="App-header">
-              <Navbar
+              {/* <Navbar
                 userInSession={this.state.loggedInUser}
                 logout={this.logout}
-              />
+              /> */}
               <Switch>
                 <Route exact path="/profile" render={() => <Profile />} />
 
