@@ -34,7 +34,7 @@ passport.use(
     {
       clientID: process.env.ClientID,
       clientSecret: process.env.ClientSecret,
-      callbackURL: "http://localhost:5000/auth/login/spotify/callback",
+      callbackURL: "https://a-live.herokuapp.com/login/spotify/callback",
       passReqToCallback: true
     },
 
