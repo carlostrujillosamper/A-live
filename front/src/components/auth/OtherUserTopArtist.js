@@ -5,8 +5,9 @@ import AuthService from './AuthService';
 class OtherUserTopArtist extends Component {
   constructor(props){
       super(props);
-      this.state = { favouriteArtist: [], isLoading:true };
+      this.state = { favouriteArtist: [], isLoading:true , added:true};
       this.service = new AuthService()
+      
   }
 
   getAllEvents = () =>{
@@ -26,9 +27,16 @@ class OtherUserTopArtist extends Component {
     })
   }
 
+  addToTop(artist){
+    console.log(artist)
+    this.service.addToTop(artist)
+    
+  }
+
   componentDidMount() {
     this.getAllEvents();
   }
+
 
   render(){
     return(
@@ -53,7 +61,7 @@ class OtherUserTopArtist extends Component {
         <h2>{artist.name}</h2>
         
         <p className="body-content">{artist.genres[0]} || {artist.genres[1]}</p>
-        <p onClick> ADD TO YOUR TOP ARTIST</p>
+        <p onClick={()=> this.addToTop(artist)}> ADD TO YOUR TOP ARTIST</p>
         {/* <Button artist={artist}/> */}
       </div>
               </div>

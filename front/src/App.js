@@ -15,7 +15,7 @@ import Card from "./components/auth/TopArtists";
 import ArtistEvents from "./components/auth/ArtistEvents";
 import EventParties from "./components/auth/EventParties";
 import OtherUserTopArtist from "./components/auth/OtherUserTopArtist";
-
+import Chat from "./components/auth/Chat"
 //App es la aplicación base, que se sirve del servicio AuthService para conectar con la bbdd
 class App extends Component {
   //en el tiempo de construcción de la aplicación, creamos una instancia del authservice
@@ -102,6 +102,12 @@ componentDidMount() {
                 path="/otheruser-topartist/:userName"
                 // render={() => <ArtistEvents />}
                 component={OtherUserTopArtist}
+              />
+               <Route
+                exact
+                path="/chat"
+                // render={() => <ArtistEvents />}
+                component={Chat}
               />
                <Route
                 exact

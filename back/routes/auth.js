@@ -193,6 +193,15 @@ router.get("/refreshToken", (req, res) => {
     })
     .catch(err => console.log(err));
 });
+router.post('/add-to-top',(req,res)=>{
+  
+  User.findOneAndUpdate({ spotifyId: req.user.spotifyId },{ $push: { favouriteArtists: req.body.artist } },
+    { new: true })
+    .then(foundUser=>{
+      console.log(foundUser)
+    })
+
+})
 
 function getMyTopArtists(token) {
   axios

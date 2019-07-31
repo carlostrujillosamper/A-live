@@ -75,6 +75,7 @@ addNewParty(e) {
           <h2>{this.state.eventDetails._embedded.venues[0].name}-{this.state.eventDetails._embedded.venues[0].address.line1}</h2>
           <a  href={this.state.eventDetails.url}>Buy tickets</a>
           <h2 style={{cursor:"pointer"}} onClick={(e) => this.addNewParty(e)}>I'm going</h2>
+          <Link to={`/chat`}>Talk with other members</Link>
           {this.state.eventParties.map(party=>{
             return(
               <Link to={`/otheruser-topartist/${party.createdBy}`}><h2>{party.createdBy}</h2></Link>

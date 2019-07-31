@@ -61,7 +61,10 @@ otherUserTopArtist = (userName) =>{
   .then(response => response.data)
 
 }
-
+addToTop = (artist)=>{
+  return this.service.post('/add-to-top',{artist})
+  .then(response=>response.data)
+}
 
 }
 
