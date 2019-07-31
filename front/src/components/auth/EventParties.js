@@ -12,7 +12,6 @@ addNewParty(e) {
   const  {params}  = this.props.match;
 
    
-      // axios.post("http://localhost:5000/auth/add-party" ,{"eventId":params.eventId})
       this.service.addParties(params.eventId)  
       
           .then(addedParty => {

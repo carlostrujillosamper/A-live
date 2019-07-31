@@ -34,7 +34,7 @@ passport.use(
     {
       clientID: process.env.ClientID,
       clientSecret: process.env.ClientSecret,
-      callbackURL: `http://localhost:5000/auth/login/spotify/callback`,
+      callbackURL: `https://a-live.herokuapp.com/auth/login/spotify/callback`,
       passReqToCallback: true
     },
 
@@ -274,7 +274,7 @@ router.get(
   function(req, res) {
     // Successful authentication, redirect home.
 
-    res.redirect("http://localhost:3000/profile");
+    res.redirect("https://a-live.herokuapp.com/profile");
   }
 );
 
