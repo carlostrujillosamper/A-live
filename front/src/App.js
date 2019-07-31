@@ -66,7 +66,7 @@ componentDidMount() {
   }
 
   render() {
-    this.fetchUser();
+    // this.fetchUser();
 
     //aqui hacemos rendering condicional dependiendo de si tenemos un usuario logeado o no
     if (this.state.loggedInUser) {
