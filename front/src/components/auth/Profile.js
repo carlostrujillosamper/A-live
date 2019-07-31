@@ -11,7 +11,7 @@ class Profile extends Component {
 
   getUser = () =>{
 
-    axios.get(`https://a-live.herokuapp.com/auth/userData`,{headers: {'Content-Type':'application/json','Access-Control-Allow-Origin': '*'}})
+    axios.get(`${process.env.REACT_APP_URL}/userData`,{headers: {'Content-Type':'application/json','Access-Control-Allow-Origin': '*'}})
    
     .then(responseFromApi => {
       console.log(responseFromApi)

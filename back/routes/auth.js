@@ -36,7 +36,7 @@ passport.use(
       clientSecret: process.env.ClientSecret,
       callbackURL: `https://a-live.herokuapp.com/auth/login/spotify/callback`,
       passReqToCallback: true
-    },
+    },  
 
     function(req, accessToken, refreshToken, profile, done) {
       User.findOne(
