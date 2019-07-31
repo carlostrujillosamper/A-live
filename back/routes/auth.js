@@ -10,6 +10,7 @@ const Party = require ("../models/Party");
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
+
 // router.get("/userData", (req, res) => {
 //   let user = JSON.parse(JSON.stringify(req.user))
 //   // delete user.password
@@ -28,15 +29,37 @@ router.get('/yourArtists',(req,res)=>{
   
   res.json(req.user.favouriteArtists)
 })
+router.get('/otheruser-topartist/:userName',(req,res)=>{
+  console.log(req.params.userName)
+  User
+    .findOne({ username: req.params.userName})
+    .then(foundUser=>
+      // console.log(foundUser)
+      res.json(foundUser.favouriteArtists)
+
+      )
+  
+})
+router.get('/add-toyourartist',(req,res)=>{
+  console.log(req.params.userName)
+  User
+    .findOneAndUpdate({ username: req.user.username})
+    .then(foundUser=>
+      // console.log(foundUser)
+      res.json(foundUser.favouriteArtists)
+
+      )
+  
+})
 
 passport.use(
   new SpotifyStrategy(
     {
       clientID: process.env.ClientID,
       clientSecret: process.env.ClientSecret,
-      callbackURL: `https://a-live.herokuapp.com/auth/login/spotify/callback`,
+      callbackURL: `http://localhost:5000/auth/login/spotify/callback`,
       passReqToCallback: true
-    },  
+    },
 
     function(req, accessToken, refreshToken, profile, done) {
       User.findOne(
@@ -62,7 +85,7 @@ passport.use(
               refreshToken: refreshToken,
               photo: profile.photos[0],
               country: profile.country,
-              favouriteArtists: []
+              favouriteArtists: [],
             });
             newUser.save(function(err) {
               if (err) {
@@ -274,7 +297,7 @@ router.get(
   function(req, res) {
     // Successful authentication, redirect home.
 
-    res.redirect("https://a-live.herokuapp.com/profile");
+    res.redirect("http://localhost:3000/profile");
   }
 );
 

@@ -9,6 +9,7 @@ class Login extends Component {
     this.state = { username: '', password: '' };
     this.service = new AuthService();
   }
+  
 
   handleFormSubmit = (event) => {
     event.preventDefault();

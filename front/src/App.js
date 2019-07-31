@@ -14,6 +14,7 @@ import TopArtists from "./components/auth/TopArtists";
 import Card from "./components/auth/TopArtists";
 import ArtistEvents from "./components/auth/ArtistEvents";
 import EventParties from "./components/auth/EventParties";
+import OtherUserTopArtist from "./components/auth/OtherUserTopArtist";
 
 //App es la aplicación base, que se sirve del servicio AuthService para conectar con la bbdd
 class App extends Component {
@@ -39,6 +40,7 @@ class App extends Component {
 }
 componentDidMount() {
   this.fetchUser()
+  
 }
 
 
@@ -56,6 +58,7 @@ componentDidMount() {
           this.setState({
             loggedInUser: response
           });
+          
         })
         .catch(err => {
           this.setState({
@@ -93,6 +96,12 @@ componentDidMount() {
                 path="/artist-events/:keyword"
                 // render={() => <ArtistEvents />}
                 component={ArtistEvents}
+              />
+              <Route
+                exact
+                path="/otheruser-topartist/:userName"
+                // render={() => <ArtistEvents />}
+                component={OtherUserTopArtist}
               />
                <Route
                 exact

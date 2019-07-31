@@ -56,6 +56,13 @@ userParties = (eventId) =>{
   .then(response => response.data)
 
 }
+otherUserTopArtist = (userName) =>{
+  return this.service.get(`/otheruser-topartist/${userName}`)
+  .then(response => response.data)
+
+}
+
+
 }
 
 

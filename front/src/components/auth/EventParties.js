@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import AuthService from './AuthService';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 
 export default class EventParties extends Component {
   constructor(props){
@@ -75,7 +77,7 @@ addNewParty(e) {
           <h2 style={{cursor:"pointer"}} onClick={(e) => this.addNewParty(e)}>I'm going</h2>
           {this.state.eventParties.map(party=>{
             return(
-              <h2>{party.createdBy}</h2>
+              <Link to={`/otheruser-topartist/${party.createdBy}`}><h2>{party.createdBy}</h2></Link>
 
             )
           })}
