@@ -16,6 +16,7 @@ import ArtistEvents from "./components/auth/ArtistEvents";
 import EventParties from "./components/auth/EventParties";
 import OtherUserTopArtist from "./components/auth/OtherUserTopArtist";
 import Chat from "./components/auth/Chat"
+import LandingPage from "./components/landingPage"
 //App es la aplicación base, que se sirve del servicio AuthService para conectar con la bbdd
 class App extends Component {
   //en el tiempo de construcción de la aplicación, creamos una instancia del authservice
@@ -123,29 +124,10 @@ componentDidMount() {
       //si no estás logeado, mostrar opcionalmente o login o signup
       return (
         <React.Fragment>
-          {/* <Redirect to="/login" /> */}
 
           <div className="App">
-            <header className="App-header">
-              <Navbar
-                userInSession={this.state.loggedInUser}
-                logout={this.logout}
-              />
-              <Switch>
-                <Route exact path="/profile" render={() => <Profile />} />
-
-                <Route
-                  exact
-                  path="/signup"
-                  render={() => <SignUp getUser={this.getUser} />}
-                />
-                <Route
-                  exact
-                  path="/login"
-                  render={() => <Login getUser={this.getUser} />}
-                />
-              </Switch>
-            </header>
+          
+            <LandingPage></LandingPage>
           </div>
         </React.Fragment>
       );

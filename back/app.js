@@ -28,7 +28,7 @@ const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.
 
 const app = express();
 
-const whiteList = ['http://localhost:3000']
+const whiteList = ['http://localhost:3000','http://localhost']
 const corsOptions = {
   origin: (origin, cb) => {
     const originIsWhitelisted = whiteList.includes(origin);
