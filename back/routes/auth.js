@@ -105,7 +105,7 @@ router.get("/getmyTopArtists", (req, res) => {
     .then(axiosresponse => {
       User.findOneAndUpdate(
         { spotifyId: req.user.spotifyId },
-        { $set: { favouriteArtists: "" } },
+        { $unset: { favouriteArtists: "" } },
         { new: true }
       )
         .then(user => {
@@ -291,7 +291,7 @@ router.get(
   function(req, res) {
     // Successful authentication, redirect home.
 
-    res.redirect("http://localhost:3000/profile");
+    res.redirect("http://localhost:3000/topartists");
   }
 );
 

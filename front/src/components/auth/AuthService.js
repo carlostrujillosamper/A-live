@@ -31,7 +31,7 @@ class AuthService {
   }
 
   yourArtists = () =>{
-    return this.service.get('/yourArtists')
+    return this.service.get('/getmyTopArtists')
     .then(response => response.data)
   }
  

@@ -32,7 +32,7 @@ class Profile extends Component {
     return(
       <div>
         
-        <div style={{width: '60%', float:"left"}}>
+        <div style={{width: '60%', float:"left", color:"white"}}>
          <h2>{this.state.user.username}</h2>
         </div>
       </div>
