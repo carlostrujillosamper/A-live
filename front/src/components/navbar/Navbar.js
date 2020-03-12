@@ -17,17 +17,11 @@ class Navbar extends Component {
   }
 
   render() {
-    console.log(this.state)
-    console.log(this.props)
     if (this.state.loggedInUser) {
       return (
-        <nav className="nav-style">
-          <ul>
-            <li onClick={this.handleLogout} >Logout</li>
-            {/* <li><Link to='/topartists'>TopArtists</Link></li> */}
-          </ul>
-
-          {/* <h2><img className="profile-pic" src={this.state.loggedInUser.photo}/>{this.state.loggedInUser.username} </h2> */}
+        <nav className="nav-bar">
+          {/* <img src="https://res.cloudinary.com/dpi75nntc/image/upload/v1584033500/gifgit_1_zllf84.png"></img>
+          <i className="fa fa-cog" aria-hidden="true"></i> */}
         </nav>
       )
     } else {

@@ -17,6 +17,7 @@ import EventParties from "./components/auth/EventParties";
 import OtherUserTopArtist from "./components/auth/OtherUserTopArtist";
 import Chat from "./components/auth/Chat";
 import LandingPage from "./components/landingPage";
+import FootBar from "./components/navbar/FootBar";
 //App es la aplicación base, que se sirve del servicio AuthService para conectar con la bbdd
 class App extends Component {
   //en el tiempo de construcción de la aplicación, creamos una instancia del authservice
@@ -71,7 +72,6 @@ class App extends Component {
       //en este caso mostramos los contenidos ya que hay usuario
       return (
         <React.Fragment>
-
           <div className="App">
             <header className="App-header">
               <Navbar
@@ -90,9 +90,18 @@ class App extends Component {
               />
               <Route
                 exact
+                path="/profile"
+                render={() => (
+                  <Profile userInSession={this.state.loggedInUser} logout={this.logout}/>
+                )}
+              />
+              <Route
+                
                 path="/artist-events/:keyword"
                 // render={() => <ArtistEvents />}
-                component={ArtistEvents}
+                render={(props)=>(
+                  <ArtistEvents {...props} userInSession={this.state.loggedInUser}></ArtistEvents>
+                )}
               />
               <Route
                 exact
@@ -113,6 +122,7 @@ class App extends Component {
                 component={EventParties}
               />
             </header>
+            <FootBar></FootBar>
           </div>
         </React.Fragment>
       );
