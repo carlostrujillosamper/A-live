@@ -50,7 +50,7 @@ class ArtistEvents extends Component {
           {this.state.artistEvents.length!==0?
           this.state.artistEvents.map(event=>
           <div className='event-info'>
-            <p>{event._embedded.venues[0].city.name} - {event._embedded.venues[0].name} {event.dates.start.localDate} <i class="fa fa-star-o" aria-hidden="true"></i> </p>
+            <Link className="link-to-details" to={`/event-details/${selectedArtist.name}/${event.id}`}><p>{event._embedded.venues[0].city.name} - {event._embedded.venues[0].name} {event.dates.start.localDate} <i class="fa fa-star-o" aria-hidden="true"></i> </p></Link>
           </div>
             
           ):<h3>Bad luck! No upcoming events</h3>}

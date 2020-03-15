@@ -117,7 +117,7 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/event-parties/:eventId"
+                path="/event-details/:artist/:eventId"
                 // render={() => <ArtistEvents />}
                 component={EventParties}
               />

@@ -4,28 +4,19 @@ import { Link } from 'react-router-dom';
 
 
 class Profile extends Component {
-  constructor(){
-      super();
+  constructor(props){
+      super(props);
       this.state = { user: {} };
+
   }
 
-  getUser = () =>{
-
-    axios.get(`${process.env.REACT_APP_URL}/userData`,{headers: {'Content-Type':'application/json','Access-Control-Allow-Origin': '*'}})
-   
-    .then(responseFromApi => {
-      console.log(responseFromApi)
-      // this.setState({
-      //   user: responseFromApi.data
-      // })
-      
-    })
-    .catch(err=>console.log(err))
+  handleLogout = (e) => {
+    this.props.logout()
   }
 
-  componentDidMount() {
-    this.getUser();
-  }
+
+
+
 
   render(){
 

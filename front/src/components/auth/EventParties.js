@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import AuthService from './AuthService';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import EventMap from './Event-Map';
 
 export default class EventParties extends Component {
   constructor(props){
@@ -68,11 +68,19 @@ addNewParty(e) {
 
         (
           <React.Fragment>
-          <div style={{backgroundImage:'url(' + this.state.eventDetails.images[1].url + ')'}}  className="card-header-event">
-          <h2>{this.state.eventDetails.dates.start.localDate}</h2>
-          <h2>{this.state.eventDetails.name}</h2>
-          <h2>{this.state.eventDetails._embedded.venues[0].markets[0].name}/{this.state.eventDetails._embedded.venues[0].city.name}</h2>
-          <h2>{this.state.eventDetails._embedded.venues[0].name}-{this.state.eventDetails._embedded.venues[0].address.line1}</h2>
+            <div className="map-container">
+            <EventMap lat={this.state.eventDetails._embedded.venues[0].location.latitude} lng={this.state.eventDetails._embedded.venues[0].location.longitude}></EventMap>
+            </div>
+            <div className="event-detail-title">
+        <h3>{this.props.match.params.artist}</h3>
+            <p>{this.state.eventDetails.name}</p>
+            <p>{this.state.eventDetails.dates.start.localDate}</p>
+            <p>{this.state.eventDetails._embedded.venues[0].markets[0].name}/{this.state.eventDetails._embedded.venues[0].city.name}</p>
+            <p>{this.state.eventDetails._embedded.venues[0].name}-{this.state.eventDetails._embedded.venues[0].address.line1}</p>
+            </div>
+
+
+          {/* <div style={{backgroundImage:'url(' + this.state.eventDetails.images[1].url + ')'}}  className="card-header-event">
           <a  href={this.state.eventDetails.url}>Buy tickets</a>
           <h2 style={{cursor:"pointer"}} onClick={(e) => this.addNewParty(e)}>I'm going</h2>
           <Link to={`/chat`}>Talk with other members</Link>
@@ -83,7 +91,7 @@ addNewParty(e) {
             )
           })}
 
-          </div>
+          </div> */}
           
           
           </React.Fragment>

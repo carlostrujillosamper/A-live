@@ -152,6 +152,10 @@ img{
   margin-top:2rem;
   color:white;
   font-size: 1.2rem;
+  .link-to-details{
+    text-decoration: none;
+    color: white;
+  }
   i{
     font-size: 2.5rem;
     color:$blue
@@ -159,7 +163,27 @@ img{
 
 }
 }
+.map-container{
+  height: 35%;
+  display: block;
 
+}
+
+.event-detail-title {
+  margin-top: 10rem;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+   color:white;
+ 
+}
+
+hr{
+  color: white;
+  width: 2rem;
+}
 // .App-header {
 //   // background-color:#00FFA1;
 //   opacity : 0.8;
