@@ -16,7 +16,7 @@ class TopArtists extends Component {
     this.service.yourArtists().then(responseFromApi => {
       this.setState({
         ...this.state,
-        favouriteArtists: responseFromApi.splice(1, responseFromApi.length),
+        favouriteArtists: responseFromApi
       });
     });
   };
@@ -27,9 +27,9 @@ class TopArtists extends Component {
 
   render() {
     return (
-      <div>
-        <div className="my-top-artists">
-          <img src="https://res.cloudinary.com/dpi75nntc/image/upload/v1583946914/Group_4_ssn5jc.png"></img>
+      <div className="my-top-artists">
+        <div className="my-top-artists-title">
+          <img src="https://res.cloudinary.com/dpi75nntc/image/upload/v1583946914/Group_4_ssn5jc.png" ></img>
         </div>
         <div className='imgs-container'>
         {this.state.favouriteArtists ? this.state.favouriteArtists.map(artist => (

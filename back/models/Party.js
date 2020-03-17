@@ -3,9 +3,15 @@ const Schema   = mongoose.Schema;
 
 const userSchema = new Schema({
 eventId : String,
+artist : String,
+picture: String,
+name : String,
+date : String,
+country : String,
+city : String,
+venue : String,
+address : String,
 members :[{ type: Schema.Types.ObjectId, ref: "User" }],
-createdBy : String,
-
 
 }, {
   timestamps: {

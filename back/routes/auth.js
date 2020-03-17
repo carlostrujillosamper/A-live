@@ -5,97 +5,35 @@ const axios = require("axios");
 
 const router = express.Router();
 const User = require("../models/User");
-const Party = require ("../models/Party");
+const Party = require("../models/Party");
 // const bcrypt = require("bcrypt");
 // const bcryptSalt = 10;
 
-
 router.get("/currentUser", (req, res) => {
   // getMyTopArtists()
- 
+
   res.status(200).json(req.user);
 });
 
-router.get('/yourArtists',(req,res)=>{
+router.get("/yourArtists", (req, res) => {
   // console.log(req.user)
-  
-  res.json(req.user.favouriteArtists)
-})
-router.get('/otheruser-topartist/:userName',(req,res)=>{
-  console.log(req.params.userName)
-  User
-    .findOne({ username: req.params.userName})
-    .then(foundUser=>
-      // console.log(foundUser)
-      res.json(foundUser.favouriteArtists)
 
-      )
-  
-})
-router.get('/add-toyourartist',(req,res)=>{
-  console.log(req.params.userName)
-  User
-    .findOneAndUpdate({ username: req.user.username})
-    .then(foundUser=>
-      // console.log(foundUser)
-      res.json(foundUser.favouriteArtists)
-
-      )
-  
-})
-
-// passport.use(
-//   new SpotifyStrategy(
-//     {
-//       clientID: process.env.ClientID,
-//       clientSecret: process.env.ClientSecret,
-//       callbackURL: `http://localhost:5000/auth/login/spotify/callback`,
-//       passReqToCallback: true
-//     },
-
-//     function(req, accessToken, refreshToken, profile, done) {
-//       User.findOne(
-//         {
-//           spotifyId: profile.id
-//         },
-//         function(err, user) {
-//           if (err) {
-//             done(err);
-//           }
-//           if (user) {
-//             req.login(user, function(err) {
-//               if (err) {
-//                 return next(err);
-//               }
-//               return done(null, user);
-//             });
-//           } else {
-//             let newUser = new User({
-//               spotifyId: profile.id,
-//               username: profile.displayName,
-//               token: accessToken,
-//               refreshToken: refreshToken,
-//               photo: profile.photos[0],
-//               country: profile.country,
-//               favouriteArtists: [],
-//             });
-//             newUser.save(function(err) {
-//               if (err) {
-//                 throw err;
-//               }
-//               req.login(newUser, function(err) {
-//                 if (err) {
-//                   return next(err);
-//                 }
-//                 return done(null, newUser);
-//               });
-//             });
-//           }
-//         }
-//       );
-//     }
-//   )
-// );
+  res.json(req.user.favouriteArtists);
+});
+router.get("/otheruser-topartist/:userName", (req, res) => {
+  console.log(req.params.userName);
+  User.findOne({ username: req.params.userName }).then(foundUser =>
+    // console.log(foundUser)
+    res.json(foundUser.favouriteArtists)
+  );
+});
+router.get("/add-toyourartist", (req, res) => {
+  console.log(req.params.userName);
+  User.findOneAndUpdate({ username: req.user.username }).then(foundUser =>
+    // console.log(foundUser)
+    res.json(foundUser.favouriteArtists)
+  );
+});
 
 router.get("/getmyTopArtists", (req, res) => {
   axios
@@ -128,105 +66,21 @@ router.get("/getmyTopArtists", (req, res) => {
     .catch(err => console.log(err));
 });
 
-
-
-
-// function getMyTopArtists() {
-//   axios
-//     .get("https://api.spotify.com/v1/me/top/artists", {
-//       headers: { Authorization: `Bearer ${req.user.token}` }
-//     })
-//     .then(axiosresponse => {
-//       User.findOneAndUpdate(
-//         { spotifyId: req.user.spotifyId },
-//         { $set: { favouriteArtists: "" } },
-//         { new: true }
-//       )
-//         .then(user => {
-//           User.findOneAndUpdate(
-//             { spotifyId: req.user.spotifyId },
-//             { $addToSet: { favouriteArtists: axiosresponse.data.items } },
-//             { new: true }
-//           )
-//             .then(user => {
-//               console.log(user.favouriteArtists);
-//             })
-//             .catch(err => {
-//               console.log(err);
-//             });
-//         })
-//         .catch(err => {
-//           console.log(err);
-//         });
-//     })
-//     .catch(err => console.log(err));
-// }
-
-// router.get("/refreshToken", (req, res) => {
-//   axios
-//     .post("https://accounts.spotify.com/api/token", {
-//       headers: {
-//         Authorization: `Basic  ${+Buffer.from(
-//           process.env.ClientID,
-//           +":" + process.env.ClientSecret
-//         ).toString("base64")}`
-//       }
-//     })
-//     .then(axiosresponse => {
-//       res.json(axiosresponse.data);
-//       // console.log(axiosresponse)
-//     })
-//     .catch(err => console.log(err));
-// });
-router.post('/add-to-top',(req,res)=>{
-  
-  User.findOneAndUpdate({ spotifyId: req.user.spotifyId },{ $push: { favouriteArtists: req.body.artist } },
-    { new: true })
-    .then(foundUser=>{
-      console.log(foundUser)
-    })
-
-})
-
-// function getMyTopArtists(token) {
-//   axios
-//     .get("https://api.spotify.com/v1/me/top/artists", {
-//       headers: { Authorization: `Bearer ${token}` }
-//     })
-//     .then(axiosresponse => {
-//       axiosresponse.data.items.map(artist => {
-//         console.log(artist.name);
-//       });
-//     })
-//     .catch(err => console.log(err));
-// }
-
-// function getAllConcerts(artists) {
-//   axios
-//     .get(
-//       `https://app.ticketmaster.com/discovery/v2/events.json?keyword=${artists}&size=5&sort=date,asc&apikey=eHV9YEef21RiqpNGWGJB1C3rIY16C62y`
-//     )
-
-//     .then(responseFromApi => {
-//       console.log(responseFromApi.data._embedded.events[0].name);
-//       console.log(
-//         responseFromApi.data._embedded.events[0].dates.start.localDate
-//       );
-//       console.log(
-//         responseFromApi.data._embedded.events[0]._embedded.venues[0].name
-//       );
-//     })
-//     .catch(err => console.log(err));
-// }
+router.post("/add-to-top", (req, res) => {
+  User.findOneAndUpdate(
+    { spotifyId: req.user.spotifyId },
+    { $push: { favouriteArtists: req.body.artist } },
+    { new: true }
+  ).then(foundUser => {
+    console.log(foundUser);
+  });
+});
 
 router.get("/artist-events/:keyword", (req, res, next) => {
   axios
     .get(
-      `https://app.ticketmaster.com/discovery/v2/events.json?keyword=${
-        req.params.keyword
-      }&size=10&sort=date,asc&apikey=eHV9YEef21RiqpNGWGJB1C3rIY16C62y`
+      `https://app.ticketmaster.com/discovery/v2/events.json?keyword=${req.params.keyword}&sort=date,asc&apikey=eHV9YEef21RiqpNGWGJB1C3rIY16C62y`
     )
-
     .then(responseFromApi => {
       res.json(responseFromApi.data._embedded.events);
     })
@@ -234,43 +88,97 @@ router.get("/artist-events/:keyword", (req, res, next) => {
 });
 
 router.get("/event-parties/:eventId", (req, res, next) => {
-  axios
-    .get(
-      `https://app.ticketmaster.com/discovery/v2/events/${
-        req.params.eventId
-      }.json?apikey=eHV9YEef21RiqpNGWGJB1C3rIY16C62y`
-    )
+  Party.findOne({
+    $and: [{ members: req.user._id, eventId: req.params.eventId }]
+  }).then(foundParty => {
+    if (foundParty) {
+      console.log(foundParty);
 
-    .then(responseFromApi => {
-      res.json(responseFromApi.data)
+      axios
+        .get(
+          `https://app.ticketmaster.com/discovery/v2/events/${req.params.eventId}.json?apikey=eHV9YEef21RiqpNGWGJB1C3rIY16C62y`
+        )
+
+        .then(responseFromApi => {
+          res.json({ data: responseFromApi.data, favourited: true });
+        })
+        .catch(err => console.log(err));
+    } else {
+      console.log("not found");
+      axios
+        .get(
+          `https://app.ticketmaster.com/discovery/v2/events/${req.params.eventId}.json?apikey=eHV9YEef21RiqpNGWGJB1C3rIY16C62y`
+        )
+
+        .then(responseFromApi => {
+          res.json({ data: responseFromApi.data, favourited: false });
+        })
+        .catch(err => console.log(err));
+    }
+  });
+});
+router.post("/add-party", (req, res) => {
+  console.log("hola");
+  const {
+    eventId,
+    picture,
+    artist,
+    name,
+    date,
+    country,
+    city,
+    venue,
+    address
+  } = req.body;
+
+  Party.findOne({ eventId }).then(addedParty => {
+    if (addedParty) {
+      Party.findByIdAndUpdate(
+        addedParty._id,
+        { $addToSet: { members: req.user._id } },
+        { new: true }
+      ).then(updatedParty => res.json(updatedParty));
+    } else {
+      Party.create({
+        eventId,
+        picture,
+        artist,
+        name,
+        date,
+        country,
+        city,
+        venue,
+        address,
+        members: [req.user._id]
+      }).then(addedParty => [res.json(addedParty)]);
+    }
+  });
+});
+
+router.post("/erase-from-favs", (req, res) => {
+  console.log(req.body.eventId);
+  Party.findOneAndUpdate(
+    { eventId: req.body.eventId },
+    { $unset: { members: req.user._id } },
+    { new: true }
+  ).then(updatedParty => res.json(updatedParty));
+});
+
+router.get("/my-events", (req, res) => {
+  Party.find({ members: req.user._id })
+    .then(foundEvents => {
+      res.json(foundEvents);
     })
     .catch(err => console.log(err));
 });
-router.post('/add-party', (req, res) => {
-  
-  Party
-    .create({
-      eventId: req.body.eventId,
-      createdBy : req.user.username,
-      members :[req.user._id]
-    })
-    .then(addedParty => [
-      res.json(addedParty)
-    ])
 
-})
-router.get('/user-parties/:eventId',(req,res)=>{
-  console.log(req.params.eventId)
+router.get("/user-parties/:eventId", (req, res) => {
+  console.log(req.params.eventId);
 
-  Party
-    .find({ eventId: req.params.eventId })
-    .then(eventParties => 
-      [
-      res.json(eventParties)
-    ])
+  Party.find({ eventId: req.params.eventId })
+    .then(eventParties => [res.json(eventParties)])
     .catch(err => console.log(err));
-
-})
+});
 
 router.get("/login", (req, res, next) => {
   res.render("auth/login", { message: req.flash("error") });

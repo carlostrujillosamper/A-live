@@ -46,11 +46,17 @@ eventParties = (eventId) =>{
   .then(response => response.data)
 }
 
-addParties = (eventId) =>{
-  return this.service.post(`/add-party`,{eventId})
+addParties = (eventId,picture, artist, name, date, country, city, venue, address) =>{
+  return this.service.post(`/add-party`,{eventId,picture, artist, name, date, country, city, venue, address})
   .then(response => response.data)
 
 }
+
+eraseFromFavs = (eventId) =>{
+  return this.service.post('/erase-from-favs',{eventId})
+  .then(response=> response.data)
+}
+
 userParties = (eventId) =>{
   return this.service.get(`/user-parties/${eventId}`)
   .then(response => response.data)
@@ -63,6 +69,11 @@ otherUserTopArtist = (userName) =>{
 }
 addToTop = (artist)=>{
   return this.service.post('/add-to-top',{artist})
+  .then(response=>response.data)
+}
+
+myEvents = () =>{
+  return this.service.get('/my-events')
   .then(response=>response.data)
 }
 

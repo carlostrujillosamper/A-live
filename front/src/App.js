@@ -18,6 +18,7 @@ import OtherUserTopArtist from "./components/auth/OtherUserTopArtist";
 import Chat from "./components/auth/Chat";
 import LandingPage from "./components/landingPage";
 import FootBar from "./components/navbar/FootBar";
+import MyEvents from "./components/auth/MyEvents";
 //App es la aplicación base, que se sirve del servicio AuthService para conectar con la bbdd
 class App extends Component {
   //en el tiempo de construcción de la aplicación, creamos una instancia del authservice
@@ -92,15 +93,20 @@ class App extends Component {
                 exact
                 path="/profile"
                 render={() => (
-                  <Profile userInSession={this.state.loggedInUser} logout={this.logout}/>
+                  <Profile
+                    userInSession={this.state.loggedInUser}
+                    logout={this.logout}
+                  />
                 )}
               />
               <Route
-                
                 path="/artist-events/:keyword"
                 // render={() => <ArtistEvents />}
-                render={(props)=>(
-                  <ArtistEvents {...props} userInSession={this.state.loggedInUser}></ArtistEvents>
+                render={props => (
+                  <ArtistEvents
+                    {...props}
+                    userInSession={this.state.loggedInUser}
+                  ></ArtistEvents>
                 )}
               />
               <Route
@@ -115,11 +121,16 @@ class App extends Component {
                 // render={() => <ArtistEvents />}
                 component={Chat}
               />
+              <Route exact path="/my-events" render={() => <MyEvents />} />
               <Route
-                exact
                 path="/event-details/:artist/:eventId"
                 // render={() => <ArtistEvents />}
-                component={EventParties}
+                render={props => (
+                  <EventParties
+                    {...props}
+                    userInSession={this.state.loggedInUser}
+                  ></EventParties>
+                )}
               />
             </header>
             <FootBar></FootBar>

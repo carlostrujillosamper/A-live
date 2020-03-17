@@ -10,7 +10,6 @@ class ArtistEvents extends Component {
       userInSession: this.props.userInSession,
       artistEvents: [],
       isLoading: true,
-      // members: new Array(10).fill().map((e, i) => i)
     };
     this.service = new AuthService();
   }
@@ -18,7 +17,6 @@ class ArtistEvents extends Component {
 
   getArtistEvents = () => {
     const { params } = this.props.match;
-    // console.log(this.props)
     this.service
       .artistEvents(params.keyword)
       .then(responseFromApi => {
@@ -38,11 +36,9 @@ class ArtistEvents extends Component {
 
   render() {
     const selectedArtist = this.state.userInSession.favouriteArtists.find(artist=>artist.name===this.props.match.params.keyword)
-    console.log(this.state)
-    console.log(this.state.artistEvents.length)
     return (
       <div className="artist-events">
-        <div className="img-container" style={{backgroundImage:`url("${selectedArtist.images[0].url}")`}} >
+        <div className="img-container" style={{backgroundImage:`url("${selectedArtist.images[0].url}")`}}>
         <p>{selectedArtist.name}</p>
         </div>
         <img src="https://res.cloudinary.com/dpi75nntc/image/upload/v1584041832/Group_13_okpxqy.png"></img>

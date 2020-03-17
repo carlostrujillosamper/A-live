@@ -1,104 +1,144 @@
-import React, { Component } from 'react'
-import AuthService from './AuthService';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import EventMap from './Event-Map';
+import React, { Component } from "react";
+import AuthService from "./AuthService";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import EventMap from "./Event-Map";
 
 export default class EventParties extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = { eventDetails: [], isLoading:true, eventParties:[] };
-    this.service = new AuthService()
-}
-addNewParty(e) {
-  const  {params}  = this.props.match;
+    this.state = {
+      eventDetails: [],
+      isLoading: true,
+      eventParties: [],
+      favourited: false,
+      userInSession: this.props.userInSession
+    };
+    this.service = new AuthService();
+  }
+  addNewParty() {
+    const { params } = this.props.match;
+    const selectedArtistPic = this.state.userInSession.favouriteArtists.find(
+      artist => artist.name === this.props.match.params.artist
+    );
 
-   
-      this.service.addParties(params.eventId)  
-      
-          .then(addedParty => {
-            let clonedPartiesArray = [...this.state.eventParties]
-            clonedPartiesArray.push(addedParty)
-              this.setState({
-                  ...this.state,
-                  eventParties : clonedPartiesArray,
-                  
-              })
-          })
+    this.service
+      .addParties(
+        params.eventId,
+        selectedArtistPic.images[0].url,
+        this.props.match.params.artist,
+        this.state.eventDetails.name,
+        this.state.eventDetails.dates.start.localDate,
+        this.state.eventDetails._embedded.venues[0].markets[0].name,
+        this.state.eventDetails._embedded.venues[0].city.name,
+        this.state.eventDetails._embedded.venues[0].name,
+        this.state.eventDetails._embedded.venues[0].address.line1
+      )
 
-  
-}
+      .then(favouritedParty =>
+        this.setState({ ...this.state, favourited: true })
+      );
+  }
 
+  eraseFromFavs() {
+    const { params } = this.props.match;
 
+    this.service
+      .eraseFromFavs(params.eventId)
+      .then(unfavouritedParty =>
+        this.setState({ ...this.state, favourited: false })
+      );
+  }
 
   getEventParties = () => {
-    const  {params}  = this.props.match;
-    this.service.eventParties(params.eventId)
-    .then( responseFromApi =>{
+    const { params } = this.props.match;
+    this.service
+      .eventParties(params.eventId)
+      .then(responseFromApi => {
+        console.log(responseFromApi);
         this.setState({
-          eventDetails:responseFromApi,
-          isLoading:false
+          eventDetails: responseFromApi.data,
+          favourited: responseFromApi.favourited,
+          isLoading: false
         });
-    })
-    .catch((err)=>{
-        console.log(err)
-    })
-}
-  getUserParties = () =>{
-    console.log(this.props.match.params.eventId)
-    // const  {params}  = this.props.match;
-
-    this.service.userParties(this.props.match.params.eventId)
-    .then(responseFromApi =>{
-      this.setState({
-        eventParties : responseFromApi
       })
-    })
-  }
+      .catch(err => {
+        console.log(err);
+      });
+  };
+  getUserParties = () => {
+    this.service
+      .userParties(this.props.match.params.eventId)
+      .then(responseFromApi => {
+        this.setState({
+          eventParties: responseFromApi
+        });
+      });
+  };
 
   componentDidMount() {
     this.getEventParties();
-    this.getUserParties();
-
+    // this.getUserParties();
   }
   render() {
+    console.log(this.state.userInSession);
     return (
       <React.Fragment>
-      {!this.state.isLoading ? 
-
-        (
+        {!this.state.isLoading ? (
           <React.Fragment>
-            <div className="map-container">
-            <EventMap lat={this.state.eventDetails._embedded.venues[0].location.latitude} lng={this.state.eventDetails._embedded.venues[0].location.longitude}></EventMap>
+            {/* <div  className="map-container">
+              <EventMap
+                lat={
+                  this.state.eventDetails._embedded.venues[0].location.latitude
+                }
+                lng={
+                  this.state.eventDetails._embedded.venues[0].location.longitude
+                }
+              ></EventMap>
             </div>
             <div className="event-detail-title">
-        <h3>{this.props.match.params.artist}</h3>
-            <p>{this.state.eventDetails.name}</p>
-            <p>{this.state.eventDetails.dates.start.localDate}</p>
-            <p>{this.state.eventDetails._embedded.venues[0].markets[0].name}/{this.state.eventDetails._embedded.venues[0].city.name}</p>
-            <p>{this.state.eventDetails._embedded.venues[0].name}-{this.state.eventDetails._embedded.venues[0].address.line1}</p>
+              <h3>{this.props.match.params.artist}</h3>
+              <hr></hr>
+              <div  className="event-detail-info">
+                <p>{this.state.eventDetails.name}</p>
+                <p>{this.state.eventDetails.dates.start.localDate}</p>
+                <p>
+                  {this.state.eventDetails._embedded.venues[0].markets[0].name}/
+                  {this.state.eventDetails._embedded.venues[0].city.name}
+                </p>
+                <p>
+                  {this.state.eventDetails._embedded.venues[0].name}-
+                  {this.state.eventDetails._embedded.venues[0].address.line1}
+                </p>
+              </div>
+            </div> */}
+            <div className="fav-ticket-container">
+              {this.state.favourited ? (
+                <div className="fav-icon-container-fav">
+                  <i
+                    onClick={() => this.eraseFromFavs()}
+                    className="fa fa-star"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+              ) : (
+                <div
+                  onClick={() => this.addNewParty()}
+                  className="fav-icon-container-nonfav"
+                >
+                  <i className="fa fa-star-o" aria-hidden="true"></i>
+                </div>
+              )}
+
+              <a href={this.state.eventDetails.url}>
+                <button type="button">Get tickets</button>
+              </a>
             </div>
-
-
-          {/* <div style={{backgroundImage:'url(' + this.state.eventDetails.images[1].url + ')'}}  className="card-header-event">
-          <a  href={this.state.eventDetails.url}>Buy tickets</a>
-          <h2 style={{cursor:"pointer"}} onClick={(e) => this.addNewParty(e)}>I'm going</h2>
-          <Link to={`/chat`}>Talk with other members</Link>
-          {this.state.eventParties.map(party=>{
-            return(
-              <Link to={`/otheruser-topartist/${party.createdBy}`}><h2>{party.createdBy}</h2></Link>
-
-            )
-          })}
-
-          </div> */}
-          
-          
           </React.Fragment>
-        )
-        :<h2>Loading</h2>}
-        </React.Fragment>
-    )
- 
+        ) : (
+          <h2>Loading</h2>
+        )}
+      </React.Fragment>
+    );
   }
 }

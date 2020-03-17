@@ -38,13 +38,13 @@ export default class FootBar extends Component {
             :<img name='myArtists' src="https://res.cloudinary.com/dpi75nntc/image/upload/v1584019758/Group_9_gmuybh.png"></img>}
           </div>
           </Link>
-
+          <Link to='/my-events'>
           <div className="my-events-icon" onClick={(e) => this.pressIcon(e)}>
             {!this.state.myEvents?
           <img name='myEvents' src="https://res.cloudinary.com/dpi75nntc/image/upload/v1584019331/Group_6_zdjuqf.png"></img>
           :<img name='myEvents' src="https://res.cloudinary.com/dpi75nntc/image/upload/v1584031736/Group_11_klxg67.png"></img>}
-
           </div>
+          </Link>
           <div className="feed-icon" onClick={(e) => this.pressIcon(e)}>
             {!this.state.feed?
           <img name="feed" src="https://res.cloudinary.com/dpi75nntc/image/upload/v1584019377/Group_7_rhmoj1.png"></img>
