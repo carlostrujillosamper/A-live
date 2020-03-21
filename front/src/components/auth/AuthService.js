@@ -77,6 +77,11 @@ myEvents = () =>{
   .then(response=>response.data)
 }
 
+trendingEvents = () =>{
+  return this.service.get('/trending-events')
+  .then(response=>response.data)
+}
+
 }
 
 

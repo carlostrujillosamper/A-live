@@ -12,20 +12,6 @@ export default class MyEvents extends Component {
     this.service = new AuthService();
   }
 
-  openPopUp() {
-    let toggle = !this.state.popUpOpen;
-    this.setState({
-      ...this.state,
-      popUpOpen: toggle
-    });
-  }
-  closePopUp(){
-    let toggle = !this.state.popUpOpen;
-    this.setState({
-      ...this.state,
-      popUpOpen: toggle
-    });
-  }
 
   componentDidMount() {
     this.service.myEvents().then(myFavouriteEvents => {

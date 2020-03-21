@@ -77,12 +77,19 @@ router.post("/add-to-top", (req, res) => {
 });
 
 router.get("/artist-events/:keyword", (req, res, next) => {
+  let actualArtistResults = []
   axios
     .get(
       `https://app.ticketmaster.com/discovery/v2/events.json?keyword=${req.params.keyword}&sort=date,asc&apikey=eHV9YEef21RiqpNGWGJB1C3rIY16C62y`
     )
     .then(responseFromApi => {
-      res.json(responseFromApi.data._embedded.events);
+      
+      responseFromApi.data._embedded.events.forEach(event=>{
+        if(event._embedded.attractions[0].name.toLowerCase()===req.params.keyword.toLowerCase()) {
+          actualArtistResults.push(event)
+        }
+        res.json(actualArtistResults);
+      })
     })
     .catch(err => console.log(err));
 });
@@ -183,6 +190,12 @@ router.get("/user-parties/:eventId", (req, res) => {
 router.get("/login", (req, res, next) => {
   res.render("auth/login", { message: req.flash("error") });
 });
+
+router.get('/trending-events',(req,res)=>{
+  Party.find().sort({"members":-1})
+  .then(trendingEvents=>res.json(trendingEvents))
+  .catch(err=>console.log(err))
+})
 
 router.get(
   "/login/spotify",
