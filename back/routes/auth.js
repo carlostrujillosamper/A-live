@@ -84,12 +84,7 @@ router.get("/artist-events/:keyword", (req, res, next) => {
     )
     .then(responseFromApi => {
       
-      responseFromApi.data._embedded.events.forEach(event=>{
-        if(event._embedded.attractions[0].name.toLowerCase()===req.params.keyword.toLowerCase()) {
-          actualArtistResults.push(event)
-        }
-        res.json(actualArtistResults);
-      })
+        res.json(responseFromApi.data._embedded.events);
     })
     .catch(err => console.log(err));
 });
@@ -197,6 +192,25 @@ router.get('/trending-events',(req,res)=>{
   .catch(err=>console.log(err))
 })
 
+router.get('/trending-artists',(req,res)=>{
+  console.log("holholholho")
+  let trendingArtists = []
+  User.find()
+  .then(foundUsers=>{
+    Party.find().sort({"members":-1})
+      .then(foundEvents=>{
+        foundUsers.forEach(user=>{
+          user.favouriteArtists.forEach(artist=>{
+            foundEvents.forEach(event=>{
+              if(artist.name===event.artist) trendingArtists.push(artist)
+            })
+          })
+        })
+        res.json(trendingArtists)
+      })
+  })
+})
+
 router.get(
   "/login/spotify",
   passport.authenticate("spotify", {
@@ -265,5 +279,7 @@ router.get("/logout", (req, res) => {
   req.logout();
   res.status(200).json({ message: "logged out" });
 });
+
+
 
 module.exports = router;

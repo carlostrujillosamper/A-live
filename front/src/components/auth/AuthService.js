@@ -82,6 +82,11 @@ trendingEvents = () =>{
   .then(response=>response.data)
 }
 
+trendingArtists = () =>{
+  return this.service.get('/trending-artists')
+  .then(response=>response.data)
+}
+
 }
 
 

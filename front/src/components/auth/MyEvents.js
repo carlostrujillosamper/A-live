@@ -31,7 +31,7 @@ export default class MyEvents extends Component {
           <div className="event-card-container" >
         {this.state.myFavouriteEvents.map(event => (
           <Link className="link-to-details" to={`/event-details/${event.artist}/${event.eventId}`}>
-          <div className="event-card" style={{  backgroundImage:`linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),  url("${event.picture}")`}}>
+          <div className="event-card" style={{  backgroundImage:`linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),  url("${event.picture}")`}}>
             
             <h3>{event.artist}</h3>
             <p>{event.date}</p>

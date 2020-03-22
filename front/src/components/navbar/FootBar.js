@@ -45,11 +45,11 @@ export default class FootBar extends Component {
           :<img name='myEvents' src="https://res.cloudinary.com/dpi75nntc/image/upload/v1584031736/Group_11_klxg67.png"></img>}
           </div>
           </Link>
-          <Link to='./discover'>
+          <Link to='/discover'>
           <div className="feed-icon" onClick={(e) => this.pressIcon(e)}>
             {!this.state.feed?
-          <img name="feed" src="https://res.cloudinary.com/dpi75nntc/image/upload/v1584019377/Group_7_rhmoj1.png"></img>
-          :<img name="feed" src="https://res.cloudinary.com/dpi75nntc/image/upload/v1584031752/Group_10_zg6sqf.png"></img>}
+          <img name="feed" src="https://res.cloudinary.com/dpi75nntc/image/upload/v1584873525/Group_15_vgvlvu.png"></img>
+          :<img name="feed" src="https://res.cloudinary.com/dpi75nntc/image/upload/v1584873542/Group_15_r7k2oe.png"></img>}
           </div>
           </Link>
           <div className="search" onClick={(e) => this.pressIcon(e)}>
