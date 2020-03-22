@@ -20,6 +20,7 @@ import LandingPage from "./components/landingPage";
 import FootBar from "./components/navbar/FootBar";
 import MyEvents from "./components/auth/MyEvents";
 import Discover from "./components/auth/Discover"
+import Search from "./components/auth/Search"
 //App es la aplicación base, que se sirve del servicio AuthService para conectar con la bbdd
 class App extends Component {
   //en el tiempo de construcción de la aplicación, creamos una instancia del authservice
@@ -135,7 +136,6 @@ class App extends Component {
               />
                             <Route
                 path="/discover"
-                // render={() => <ArtistEvents />}
                 render={props => (
                   <Discover
                     {...props}
@@ -143,6 +143,16 @@ class App extends Component {
                   ></Discover>
                 )}
               />
+                                          <Route
+                path="/search"
+                render={props => (
+                  <Search
+                    {...props}
+                    userInSession={this.state.loggedInUser}
+                  ></Search>
+                )}
+              />
+
             </header>
             <FootBar></FootBar>
           </div>

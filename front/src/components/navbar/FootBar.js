@@ -51,13 +51,15 @@ export default class FootBar extends Component {
           <img name="feed" src="https://res.cloudinary.com/dpi75nntc/image/upload/v1584873525/Group_15_vgvlvu.png"></img>
           :<img name="feed" src="https://res.cloudinary.com/dpi75nntc/image/upload/v1584873542/Group_15_r7k2oe.png"></img>}
           </div>
-          </Link>
+          </Link >
+          <Link to='/search'>
           <div className="search" onClick={(e) => this.pressIcon(e)}>
             {!this.state.search?
           <img name="search" src="https://res.cloudinary.com/dpi75nntc/image/upload/v1584019468/Group_8_aht93z.png"></img>
           :<img name="search" src="https://res.cloudinary.com/dpi75nntc/image/upload/v1584031767/Group_12_lrrh23.png"></img>}
 
           </div>
+          </Link>
         </div>
     );
   }
