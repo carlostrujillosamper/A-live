@@ -76,6 +76,7 @@ class App extends Component {
       return (
         <React.Fragment>
           <div className="App">
+            <div className="inside-app">
             <header className="App-header">
               <Navbar
                 userInSession={this.state.loggedInUser}
@@ -155,6 +156,7 @@ class App extends Component {
 
             </header>
             <FootBar></FootBar>
+          </div>
           </div>
         </React.Fragment>
       );

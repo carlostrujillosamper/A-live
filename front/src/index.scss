@@ -13,13 +13,33 @@ html {
   font-size: 10px;
   background-color: black;
   background-attachment: fixed;
+ 
+}
+
+@media (min-width:400px){
+  .App{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // background-color: $black;
+    
+  }
+  .inside-app{
+    width: 400px;
+    background-color: black;
+    border-color: $black;
+    border-style: solid;
+  }
+  
+
 }
 .landing-page-image {
   background-image: url("https://res.cloudinary.com/dpi75nntc/image/upload/v1583938427/Group_1_yl6kih.png");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   img {
     margin-top: 5rem;
   }
@@ -39,7 +59,7 @@ html {
   }
   .half-bottom-container {
     height: 30vh;
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -51,7 +71,7 @@ html {
 }
 
 .my-top-artists-title {
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   img {
@@ -85,6 +105,7 @@ html {
   opacity: 0.9;
   bottom: 0;
   width: 100%;
+  max-width: 400px;
   height: 15%;
   display: flex;
   justify-content: space-evenly;
@@ -108,6 +129,8 @@ html {
   }
 }
 .artist-events {
+  margin-bottom: 14rem;
+
   img {
     display: block;
     margin-left: auto;
@@ -174,9 +197,10 @@ flex-direction: column;
 }
 
 .event-detail-title {
-  position: absolute;
-  top: 19rem;
-  left: 8rem;
+  // position: absolute;
+  // top: 19rem;
+  // left: 8rem;
+  margin-top:10rem ;
   height: 50vh;
   display: flex;
   flex-direction: column;
@@ -198,6 +222,7 @@ hr {
 }
 
 .fav-ticket-container {
+  position: absolute;
   margin-top:8rem;
   // height: 100%;
   width: 100%;

@@ -17,9 +17,11 @@ class ArtistEvents extends Component {
 
   getArtistEvents = () => {
     const { params } = this.props.match;
+    let finalArr =[]
     this.service
       .artistEvents(params.keyword)
       .then(responseFromApi => {
+        
         this.setState({
           artistEvents: responseFromApi,
           isLoading: false

@@ -83,7 +83,7 @@ router.get("/artist-events/:keyword", (req, res, next) => {
       `https://app.ticketmaster.com/discovery/v2/events.json?keyword=${req.params.keyword}&sort=date,asc&apikey=eHV9YEef21RiqpNGWGJB1C3rIY16C62y`
     )
     .then(responseFromApi => {
-      
+        console.log(responseFromApi.data._embedded.events)
         res.json(responseFromApi.data._embedded.events);
     })
     .catch(err => console.log(err));
@@ -226,7 +226,9 @@ router.get(
   function(req, res) {
     // Successful authentication, redirect home.
 
+    // res.redirect("http://localhost:3000/topartists");
     res.redirect("https://a-live-demo.herokuapp.com/topartists");
+
   }
 );
 

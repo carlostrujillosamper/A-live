@@ -10,7 +10,8 @@ export default class Search extends Component {
     this.state = {
       searchValue: undefined,
       searchResults: [],
-      loaded: false
+      loaded: false,
+      finalArr : []
     };
 
     this.service = new AuthService();
@@ -23,24 +24,24 @@ export default class Search extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let finalArr = [];
 
     if (this.state.searchValue) {
       this.service
         .artistEvents(this.state.searchValue)
         .then(response => {
+
           response.forEach(event => {
             if (
-              event._embedded.attractions[0].name.toLowerCase() ===
+              event._embedded.attractions[0] && event._embedded.attractions[0].name.toLowerCase() ===
               this.state.searchValue.toLowerCase()
             ) {
               console.log(event._embedded.attractions[0].name.toLowerCase());
-              finalArr.push(event);
+              this.state.finalArr.push(event);
             }
           });
           this.setState({
             ...this.state,
-            searchResults: finalArr,
+            searchResults: this.state.finalArr,
             loaded: true
           });
         })
@@ -68,7 +69,7 @@ export default class Search extends Component {
             </label>
           </form>
         </div>
-        {this.state.loaded ? (
+        {this.state.finalArr.length>0 ? (
           <div className="search-results">
             <div className="title-container">
               <p>Search results</p>
@@ -99,7 +100,7 @@ export default class Search extends Component {
               ))}
             </div>
           </div>
-        ) : null}
+        ) : <p>No events where found for this artist</p>}
       </div>
     );
   }
