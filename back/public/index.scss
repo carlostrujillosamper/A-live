@@ -162,13 +162,21 @@ html {
     }
   }
 }
+.event-details-screen{
+display: flex;
+flex-direction: column;
 .map-container {
-  height: 35%;
-  display: block;
+  // display: block;
+  height: 35% !important;
+  div{
+    height: 35% ;
+  }
 }
 
 .event-detail-title {
-  margin-top: 10rem;
+  position: absolute;
+  top: 19rem;
+  left: 8rem;
   height: 50vh;
   display: flex;
   flex-direction: column;
@@ -190,8 +198,8 @@ hr {
 }
 
 .fav-ticket-container {
-  margin-top: 8rem;
-  height: 100%;
+  margin-top:8rem;
+  // height: 100%;
   width: 100%;
   display: flex;
   align-items: flex-end;
@@ -199,6 +207,7 @@ hr {
   i {
     font-size: 4rem;
     color: $blue;
+    margin-right: 4rem;
   }
   button {
     width: 14rem;
@@ -209,6 +218,7 @@ hr {
     border-radius: 2rem;
     border: none;
   }
+}
 }
 
 .fav-icon-container {
@@ -275,45 +285,19 @@ hr {
 }
 
 .discover-screen{
-
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   .link-to-details {
     text-decoration: none;
     color: white;
   }
 
 
-.search-bar{
-  margin-top: 5rem;
-  margin-bottom: 5rem;
-  background-color: $black;
-  height: auto;
-  width: auto;
-  input{
-    background-color: $black;
-    border: none;
-    height: 3rem;
-    width: 15rem;
-    color: white;
-    font-size: 1.5rem;
-  }
-  input:focus{
-    outline: none;
-  }
-  button{
-    padding-left: 2rem;
-
-    background-color: $black;
-    color: white;
-    border: none;
-    font-size: 1.5rem;
-  }
-}
 
 .trending-events{
+  width: 80%;
+  margin-top: 5rem;
   color: white;
   h4{
   font-size: 2.4rem;
@@ -430,6 +414,8 @@ hr {
   }
 }
 }
+
+
 
 
 

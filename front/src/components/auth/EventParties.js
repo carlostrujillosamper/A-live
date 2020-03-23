@@ -12,20 +12,22 @@ export default class EventParties extends Component {
       isLoading: true,
       eventParties: [],
       favourited: false,
-      userInSession: this.props.userInSession
+      userInSession: this.props.userInSession,
+      selectedArtistPic:undefined
     };
     this.service = new AuthService();
   }
   addNewParty() {
     const { params } = this.props.match;
-    const selectedArtistPic = this.state.userInSession.favouriteArtists.find(
+     this.selectedArtistPic = this.state.userInSession.favouriteArtists.find(
       artist => artist.name === this.props.match.params.artist
     );
 
+    this.selectedArtistPic?
     this.service
       .addParties(
         params.eventId,
-        selectedArtistPic.images[0].url,
+        this.selectedArtistPic.images[0].url,
         this.props.match.params.artist,
         this.state.eventDetails.name,
         this.state.eventDetails.dates.start.localDate,
@@ -37,7 +39,24 @@ export default class EventParties extends Component {
 
       .then(favouritedParty =>
         this.setState({ ...this.state, favourited: true })
-      );
+      ):
+      this.service
+      .addParties(
+        params.eventId,
+        this.state.eventDetails.images[0].url,
+        this.props.match.params.artist,
+        this.state.eventDetails.name,
+        this.state.eventDetails.dates.start.localDate,
+        this.state.eventDetails._embedded.venues[0].markets[0].name,
+        this.state.eventDetails._embedded.venues[0].city.name,
+        this.state.eventDetails._embedded.venues[0].name,
+        this.state.eventDetails._embedded.venues[0].address.line1
+      )
+
+      .then(favouritedParty =>
+        this.setState({ ...this.state, favourited: true })
+      )
+
   }
 
   eraseFromFavs() {
@@ -78,15 +97,14 @@ export default class EventParties extends Component {
 
   componentDidMount() {
     this.getEventParties();
-    // this.getUserParties();
   }
   render() {
-    console.log(this.state.userInSession);
+    console.log(this.state.eventDetails)
     return (
       <React.Fragment>
         {!this.state.isLoading ? (
-          <React.Fragment>
-            {/* <div  className="map-container">
+          <div className='event-details-screen'>
+            <div  className="map-container">
               <EventMap
                 lat={
                   this.state.eventDetails._embedded.venues[0].location.latitude
@@ -111,7 +129,7 @@ export default class EventParties extends Component {
                   {this.state.eventDetails._embedded.venues[0].address.line1}
                 </p>
               </div>
-            </div> */}
+            
             <div className="fav-ticket-container">
               {this.state.favourited ? (
                 <div className="fav-icon-container-fav">
@@ -134,7 +152,8 @@ export default class EventParties extends Component {
                 <button type="button">Get tickets</button>
               </a>
             </div>
-          </React.Fragment>
+            </div>
+            </div>
         ) : (
           <h2>Loading</h2>
         )}
