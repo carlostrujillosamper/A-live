@@ -226,7 +226,7 @@ router.get(
   function(req, res) {
     // Successful authentication, redirect home.
 
-    res.redirect("http://localhost:3000/topartists");
+    res.redirect("https://a-live-demo.herokuapp.com/topartists");
   }
 );
 
